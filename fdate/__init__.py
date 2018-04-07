@@ -290,7 +290,7 @@ def drange(start, end, step=1):
 
 def today(shift=0):
     day = datetime.date.today() + datetime.timedelta(days=shift)
-    return str(day)
+    return Fdate(day)
 
 
 def _is_leap(year):

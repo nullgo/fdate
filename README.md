@@ -55,11 +55,18 @@ In case time unit is not seconde, say minisecond, set `unit=1000`.
 '2018-04-07'
 ```
 
+From function `today(shift=0)`
+```python
+>>> fd = today()  # today
+>>> fd = today(-1)  # yesterday
+>>> fd = today(1)  # tomorrow
+```
+
 * Properties
 ```python
 >>> fd = Fdate('20180407')
 >>> fd.year, fd. month, fd.day
-2018, 4, 7
+(2018, 4, 7)
 >>> fd.rank  # 2018-04-07 is the 97th day of the year.
 97
 >>> fd.is_weekend
@@ -68,10 +75,12 @@ True
 False
 >>> fd.is_leap_year
 False
->>> fd.is_first_day(of='M')  # first day of ?  'M' -- month  (default), 'Y' -- year
+>>> fd.is_first_day(of='M')  # first day of the ... ?  'M' -- month (default), 'Y' -- year
 False
 >>> Fdate('2018-3-31').is_last_day()
 True
+>>> fd.to_timestamp() # to unix timestamp
+1523030400
 ``` 
 
 * Calculations
