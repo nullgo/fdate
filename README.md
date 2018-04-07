@@ -4,7 +4,7 @@ Formats date string as 'yyyy-mm-dd' and interacts directly on strings.
 Useage
 -------
 
-Cf. blow::
+
 
     >>> fd = Fdate('2018/4/7')
     >>> fd
