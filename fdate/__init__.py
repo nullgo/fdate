@@ -167,6 +167,8 @@ class Fdate(object):
 
         >>> Fdate().from_timestamp(1523030400)
         '2018-04-07'
+        >>> Fdate().from_timestamp(1523030400000, unit=1000)
+        '2018-04-07'
         """
         assert isinstance(unit, int) and unit > 0, 'unit must be positive integer!'
         self._dt = datetime.datetime.fromtimestamp(timestamp // unit)
@@ -181,6 +183,8 @@ class Fdate(object):
 
         >>> Fdate('2018-04-07').to_timestamp()
         1523030400
+        >>> Fdate('2018-04-07').to_timestamp(unit=1000)
+        1523030400000
         """
         assert isinstance(unit, int) and unit > 0, 'unit must be positive integer!'
         return int(time.mktime(self._dt.timetuple())) * unit

@@ -1,33 +1,103 @@
 # fdate
-Formats date string as 'yyyy-mm-dd' and interacts directly on strings.
 
+Formats date string as 'yyyy-mm-dd' and manipulates date strings.
+
+Installation
+---------------
+
+Use one of the following method:
+
+* pip install
+```bash
+pip --install fdate
+pip --install fdate --upgrade
+```
+* clone repository and install with:
+```
+python setup.py install
+```        
 Usage
 -------
 
+* Initializations
 
+From a string of format 'yyyy-mm-dd', where the separator '-' can be any non-digital character.
+```python
+>>> from fdate import *
+>>> fd = Fdate('2018/4/7')
+>>> fd
+'2018-04-07'
+>>> fd = Fdate('2018-4-7')
+>>> fd
+'2018-04-07'
+``` 
+From exactly 8-length digits or Fdate object.
+```python
+>>> fd = Fdate('20180407')
+>>> fd
+'2018-04-07'
+>>> fe = Fdate(fd)
+>>> fe
+'2018-04-07'
+```
 
-    >>> fd = Fdate('2018/4/7')
-    >>> fd
-    '2018-04-07'
-    >>> fd = Fdate().from_timestamp(1523030400)
-    >>> fd
-    '2018-04-07'
-    >>> fd.to_timestamp()
-    1523030400
-    >>> fd + 8
-    '2018-04-15'
-    >>> fd -= 7
-    >>> fd
-    '2018-03-31'
-    >>> fd.is_last_day(of='M')  # last day of the month
-    True
-    >>> fd - '2018-04-30'
-    -30
-    >>> fd.rank  # '2018-03-31' is the 90th day of the year
-    90
-    >>> Fdate('2018-04-30') >= '2018-03-31'
-    True
-    >>> [x for x in drange('2018-03-30', '2018-04-03')]
-    ['2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03']
-    >>> [x for x in drange('2018-04-03', '2018-03-30')]
-    ['2018-04-03', '2018-04-02', '2018-04-01', '2018-03-31', '2018-03-30']
+From unix timestamp, with default time unit: second.
+```python
+>>> fd = Fdate().from_timestamp(1523030400)
+>>> fd
+'2018-04-07'
+```
+
+In case time unit is not seconde, say minisecond, set `unit=1000`.
+```python
+>>> fd = Fdate().from_timestamp(1523030400000, unit=1000)
+>>> fd
+'2018-04-07'
+```
+
+* Properties
+```python
+>>> fd = Fdate('20180407')
+>>> fd.year, fd. month, fd.day
+2018, 4, 7
+>>> fd.rank  # 2018-04-07 is the 97th day of the year.
+97
+>>> fd.is_weekend
+True
+>>> fd.is_workload
+False
+>>> fd.is_leap_year
+False
+>>> fd.is_first_day(of='M')  # first day of ?  'M' -- month  (default), 'Y' -- year
+False
+>>> Fdate('2018-3-31').is_last_day()
+True
+``` 
+
+* Calculations
+
+```python
+>>> fd = Fdate('20180407')
+>>> fd + 1
+'2018-04-08'
+>>> fd -= 1
+>>> fd
+'2018-04-06'
+>>> fd - '2018.3.6'
+31
+>>> fd - '2018/5/6'
+-30
+>>> fd > '2018-3-6'
+True
+>>> fd == '2018.4.6'
+True
+```
+
+* Iterations
+
+```python
+>>> [x for x in drange('2018-03-30', '2018-04-03')]
+['2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03']
+>>> [x for x in drange('2018-04-03', '2018-03-30')]
+['2018-04-03', '2018-04-02', '2018-04-01', '2018-03-31', '2018-03-30']
+```
