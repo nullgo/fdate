@@ -71,7 +71,7 @@ From function `today(shift=0)`
 97
 >>> fd.is_weekend
 True
->>> fd.is_workload
+>>> fd.is_workday
 False
 >>> fd.is_leap_year
 False
