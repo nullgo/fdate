@@ -3,7 +3,7 @@ import time
 import doctest
 
 
-__version__ = '0.1.2'
+__version__ = '0.1.4'
 __author__ = ['Xian Qiu']
 
 
@@ -16,6 +16,9 @@ class Fdate(object):
 
     >>> fd = Fdate('2018/4/7')
     >>> fd
+    '2018-04-07'
+    >>> fe = Fdate(fd)
+    >>> fe
     '2018-04-07'
     >>> fd = Fdate().from_timestamp(1523030400)
     >>> fd
@@ -42,7 +45,6 @@ class Fdate(object):
     """
 
     def __init__(self, date_string=None):
-        super().__init__()
         self._dt = None
         self._date = None
         self._init(date_string)
@@ -71,7 +73,7 @@ class Fdate(object):
         return repr(self._date)
 
     def __len__(self):
-        return len(self._date)
+        return len(self._date) if self._date else 0
 
     def __add__(self, n):
         """
@@ -290,7 +292,7 @@ def drange(start, end, step=1):
 
 def today(shift=0):
     day = datetime.date.today() + datetime.timedelta(days=shift)
-    return Fdate(day)
+    return Fdate(day.strftime('%Y-%m-%d'))
 
 
 def _is_leap(year):
@@ -301,6 +303,4 @@ def _is_leap(year):
 
 if __name__ == '__main__':
     doctest.testmod()
-
-
 
