@@ -3,7 +3,7 @@ import time
 import doctest
 
 
-__version__ = '0.1.4'
+__version__ = '0.1.5'
 __author__ = ['Xian Qiu']
 
 
@@ -38,6 +38,8 @@ class Fdate(object):
     90
     >>> Fdate('2018-04-30') >= '2018-03-31'
     True
+    >>> fd[0:4]
+    '2018'
     >>> [x for x in drange('2018-03-30', '2018-04-03')]
     ['2018-03-30', '2018-03-31', '2018-04-01', '2018-04-02', '2018-04-03']
     >>> [x for x in drange('2018-04-03', '2018-03-30')]
@@ -74,6 +76,9 @@ class Fdate(object):
 
     def __len__(self):
         return len(self._date) if self._date else 0
+
+    def __getitem__(self, key):
+        return self._date[key]
 
     def __add__(self, n):
         """
