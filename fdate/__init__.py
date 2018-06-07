@@ -3,7 +3,7 @@ import time
 import doctest
 
 
-__version__ = '0.1.5'
+__version__ = '0.1.6'
 __author__ = ['Xian Qiu']
 
 
@@ -79,6 +79,9 @@ class Fdate(object):
 
     def __getitem__(self, key):
         return self._date[key]
+
+    def __hash__(self):
+        return hash(self._date)
 
     def __add__(self, n):
         """

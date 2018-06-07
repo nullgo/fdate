@@ -48,7 +48,7 @@ From unix timestamp, with default time unit: second.
 '2018-04-07'
 ```
 
-In case time unit is not seconde, say minisecond, set `unit=1000`.
+In case time unit is not second, say minisecond, set `unit=1000`.
 ```python
 >>> fd = Fdate().from_timestamp(1523030400000, unit=1000)
 >>> fd
